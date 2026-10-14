@@ -6,7 +6,7 @@ int main(void)
     ListaCursor *l = criar_lista();
 
     if (l == NULL)
-        return 1;
+        return 1;   // falha de alocacao da lista
 
     int opcao;
     int valor;
@@ -16,12 +16,12 @@ int main(void)
         switch (opcao) {
             case 0:
                 destruir_lista(l);
-                return 0;
+                return 0;   // comando 0: encerra normalmente
 
             case 1:
                 if (scanf("%d", &valor) != 1) {
                     destruir_lista(l);
-                    return 1;
+                    return 1;   // entrada malformada apos o comando
                 }
                 inserir_antes(l, valor);
                 break;
@@ -29,7 +29,7 @@ int main(void)
             case 2:
                 if (scanf("%d", &valor) != 1) {
                     destruir_lista(l);
-                    return 1;
+                    return 1;   // entrada malformada apos o comando
                 }
                 inserir_depois(l, valor);
                 break;
@@ -64,7 +64,7 @@ int main(void)
             case 9:
                 if (scanf("%d", &indice) != 1) {
                     destruir_lista(l);
-                    return 1;
+                    return 1;   // entrada malformada apos o comando
                 }
                 printf("%d\n", mover_para_indice(l, indice));
                 break;
@@ -79,5 +79,5 @@ int main(void)
     }
 
     destruir_lista(l);
-    return 0;
+    return 0;   // EOF: encerra normalmente
 }

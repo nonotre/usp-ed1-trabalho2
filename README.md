@@ -1,7 +1,6 @@
 # Trabalho 2 · Estruturas de Dados I (ICMC-USP, 2026)
 
-Lista com Cursor em duas implementações (sequencial em vetor dinâmico e duplamente encadeada) e comparação empírica de desempenho.
-Enunciado em `enunciado/enunciado.pdf`.
+Lista com Cursor em vetor dinâmico e em lista duplamente encadeada, com comparação de desempenho. Enunciado em `enunciado/enunciado.pdf`, relatório em `relatorio.pdf`.
 
 | Parte | Responsável |
 |---|---|
@@ -11,27 +10,22 @@ Enunciado em `enunciado/enunciado.pdf`.
 | (a definir) | |
 | (a definir) | |
 
-## Estrutura
+## Pastas
 
-```
-src/ListaComCursor.h, Makefile     fornecidos pelo professor
-src/main.c                         interpretador de comandos (o mesmo nos dois exercícios do Run.Codes)
-src/lista_sequencial.c             vetor dinâmico, cursor = índice
-src/lista_encadeada.c              duplamente encadeada, cursor = ponteiro
-testes/                            10 casos N.in / N.out + rodar_testes.sh
-auxiliar/benchmark.c               os 5 casos do enunciado, só pela interface
-auxiliar/rodar_benchmark.sh        compila bench_seq e bench_enc, mede, gera resultados/
-auxiliar/grafico.py                resultados/resumo.csv e graficos/*.png
-entrega/gerar_zips.sh              zips do Run.Codes (2.1 sequencial, 2.2 encadeada)
-relatorio.md                       relatório
-```
+| Pasta | O que tem |
+|---|---|
+| `src/` | código entregue: `main.c`, as duas implementações, `ListaComCursor.h` e `Makefile` do professor |
+| `testes/` | 10 casos `.in`/`.out` e `rodar_testes.sh` |
+| `auxiliar/` | `benchmark.c`, `rodar_benchmark.sh`, `grafico.py` |
+| `resultados/`, `graficos/` | dados e gráficos usados no relatório |
+| `entrega/` | `gerar_zips.sh`, que monta os zips do Run.Codes |
 
-## Reproduzir
+## Comandos
 
 ```bash
-./testes/rodar_testes.sh           # as duas implementações nos 10 casos, com e sem sanitizer
-./auxiliar/rodar_benchmark.sh      # ~2 min; regrava resultados/ e graficos/
-./entrega/gerar_zips.sh            # entrega/trabalho2.1_sequencial.zip e trabalho2.2_encadeada.zip
+./testes/rodar_testes.sh        # testa as duas implementações (com sanitizer)
+./auxiliar/rodar_benchmark.sh   # mede tudo (~2 min) e regrava resultados/ e graficos/
+./entrega/gerar_zips.sh         # entrega/trabalho2.1_sequencial.zip e trabalho2.2_encadeada.zip
 ```
 
-Os números do relatório vêm de uma única rodada do benchmark. Se rodar de novo, `resultados/` e `graficos/` mudam e as tabelas do relatório precisam ser atualizadas.
+Rodar o benchmark de novo muda os números; aí as tabelas do relatório precisam ser atualizadas.

@@ -19,7 +19,7 @@ static No *criar_no(int valor)
     No *novo = malloc(sizeof(No));
 
     if (novo == NULL)
-        return NULL;
+        return NULL;   // falha de alocacao
 
     novo->valor = valor;
     novo->anterior = NULL;
@@ -33,7 +33,7 @@ ListaCursor *criar_lista(void)
     ListaCursor *l = malloc(sizeof(ListaCursor));
 
     if (l == NULL)
-        return NULL;
+        return NULL;   // falha de alocacao
 
     l->inicio = NULL;
     l->fim = NULL;
@@ -46,7 +46,7 @@ ListaCursor *criar_lista(void)
 void destruir_lista(ListaCursor *l)
 {
     if (l == NULL)
-        return;
+        return;   // lista nula: nada a liberar
 
     No *atual = l->inicio;
 
@@ -74,7 +74,7 @@ void mover_fim(ListaCursor *l)
 int avancar_cursor(ListaCursor *l)
 {
     if (l == NULL || l->cursor == NULL || l->cursor->proximo == NULL)
-        return 0;
+        return 0;   // lista vazia ou cursor ja no fim
 
     l->cursor = l->cursor->proximo;
     return 1;
@@ -83,7 +83,7 @@ int avancar_cursor(ListaCursor *l)
 int retroceder_cursor(ListaCursor *l)
 {
     if (l == NULL || l->cursor == NULL || l->cursor->anterior == NULL)
-        return 0;
+        return 0;   // lista vazia ou cursor ja no inicio
 
     l->cursor = l->cursor->anterior;
     return 1;
@@ -92,7 +92,7 @@ int retroceder_cursor(ListaCursor *l)
 int mover_para_indice(ListaCursor *l, int indice)
 {
     if (l == NULL || indice < 0 || indice >= l->qtd)
-        return 0;
+        return 0;   // indice invalido
 
     No *atual;
 
@@ -115,7 +115,7 @@ int mover_para_indice(ListaCursor *l, int indice)
 int obter_atual(ListaCursor *l, int *valor_saida)
 {
     if (l == NULL || l->cursor == NULL || valor_saida == NULL)
-        return 0;
+        return 0;   // lista vazia
 
     *valor_saida = l->cursor->valor;
     return 1;
@@ -124,12 +124,12 @@ int obter_atual(ListaCursor *l, int *valor_saida)
 int inserir_antes(ListaCursor *l, int valor)
 {
     if (l == NULL)
-        return 0;
+        return 0;   // ponteiro nulo
 
     No *novo = criar_no(valor);
 
     if (novo == NULL)
-        return 0;
+        return 0;   // falha de alocacao: lista intacta
 
     if (l->cursor == NULL) {
         l->inicio = novo;
@@ -154,12 +154,12 @@ int inserir_antes(ListaCursor *l, int valor)
 int inserir_depois(ListaCursor *l, int valor)
 {
     if (l == NULL)
-        return 0;
+        return 0;   // ponteiro nulo
 
     No *novo = criar_no(valor);
 
     if (novo == NULL)
-        return 0;
+        return 0;   // falha de alocacao: lista intacta
 
     if (l->cursor == NULL) {
         l->inicio = novo;
@@ -184,7 +184,7 @@ int inserir_depois(ListaCursor *l, int valor)
 int remover_atual(ListaCursor *l)
 {
     if (l == NULL || l->cursor == NULL)
-        return 0;
+        return 0;   // lista vazia
 
     No *removido = l->cursor;
 
@@ -212,7 +212,7 @@ int remover_atual(ListaCursor *l)
 int tamanho_lista(ListaCursor *l)
 {
     if (l == NULL)
-        return 0;
+        return 0;   // lista nula
 
     return l->qtd;
 }

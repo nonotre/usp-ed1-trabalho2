@@ -8,7 +8,7 @@ Lista com Cursor em vetor dinâmico e em lista duplamente encadeada, com compara
 | `lista_sequencial.c`, experimentos, relatório | João Pedro Oliveira · 17930847 |
 | (a definir) | João Victor Pinheiro Lacerda · 15512277 |
 | (a definir) | Pietro Augusto Venancio da Costa · 17839104 |
-| (a definir) | Matheus de Souza Santana · (nº USP pendente) |
+| (a definir) | Matheus de Souza Santana · 17839560 |
 
 ## Pastas
 

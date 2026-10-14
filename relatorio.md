@@ -8,7 +8,7 @@ SCC0502 Algoritmos e Estruturas de Dados I · ICMC-USP · 2026
 - Lorenzo Vittorio Rudnik Spelta · 17906700
 - João Victor Pinheiro Lacerda · 15512277
 - Pietro Augusto Venancio da Costa · 17839104
-- Matheus de Souza Santana · (nº USP pendente)
+- Matheus de Souza Santana · 17839560
 
 ---
 

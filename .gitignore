@@ -1,0 +1,6 @@
+*.o
+main
+main_*
+bench_*
+.venv/
+entrega/*.zip

@@ -4,11 +4,11 @@ Lista com Cursor em vetor dinâmico e em lista duplamente encadeada, com compara
 
 | Parte | Responsável |
 |---|---|
-| `lista_encadeada.c`, `main.c` | Lorenzo Vittorio Rudnik Spelta · 17906700 |
-| `lista_sequencial.c`, experimentos, relatório | João Pedro Oliveira · 17930847 |
-| (a definir) | João Victor Pinheiro Lacerda · 15512277 |
-| (a definir) | Pietro Augusto Venancio da Costa · 17839104 |
-| (a definir) | Matheus de Souza Santana · 17839560 |
+| `main.c`, testes, experimentos, relatório | João Pedro Oliveira · 17930847 |
+| `lista_encadeada.c` | Lorenzo Vittorio Rudnik Spelta · 17906700 |
+| `lista_sequencial.c` | Matheus de Souza Santana · 17839560 |
+| revisão do relatório e testes | João Victor Pinheiro Lacerda · 15512277 |
+| revisão do relatório e testes | Pietro Augusto Venancio da Costa · 17839104 |
 
 ## Pastas
 

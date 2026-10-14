@@ -6,9 +6,9 @@ Lista com Cursor em vetor dinâmico e em lista duplamente encadeada, com compara
 |---|---|
 | `lista_encadeada.c`, `main.c` | Lorenzo Vittorio Rudnik Spelta · 17906700 |
 | `lista_sequencial.c`, experimentos, relatório | João Pedro Oliveira · 17930847 |
-| (a definir) | |
-| (a definir) | |
-| (a definir) | |
+| (a definir) | João Victor Pinheiro Lacerda · 15512277 |
+| (a definir) | Pietro Augusto Venancio da Costa · 17839104 |
+| (a definir) | Matheus de Souza Santana · (nº USP pendente) |
 
 ## Pastas
 

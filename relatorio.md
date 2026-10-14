@@ -81,6 +81,14 @@ Depois da construção, as capacidades são 1.024, 65.536, 131.072, 524.288 e 1.
 
 **Ponteiros extras (encadeada).** A lista guarda o último nó e a quantidade, então `mover_fim` e `tamanho_lista` são O(1). Cada inserção faz um `malloc` e cada remoção faz um `free`.
 
+### 2.6 Código auxiliar
+
+| Arquivo | O que faz |
+|---|---|
+| `auxiliar/benchmark.c` | Constrói as listas, executa os 5 casos com as 10 execuções e as R repetições, mede o tempo de cada bloco e grava `resultados/tempos.csv`. |
+| `auxiliar/rodar_benchmark.sh` | Compila `bench_seq` e `bench_enc` com as mesmas flags, ajusta o perfil de energia e o núcleo, roda as duas versões e chama `grafico.py`. |
+| `auxiliar/grafico.py` | Calcula média e desvio padrão em `resultados/resumo.csv` e gera os gráficos de `graficos/`. |
+
 ## 3. Resultados
 
 Tempo médio de um bloco de operações em µs (média ± desvio padrão de 10 execuções). Os valores completos estão em `resultados/resumo.csv`, e as medições individuais em `resultados/tempos.csv`.

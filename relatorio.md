@@ -22,14 +22,7 @@ As duas implementações seguem a mesma interface, `ListaComCursor.h`:
 
 ### 2.1 Ambiente
 
-| Item | Valor |
-|---|---|
-| Processador | Intel Core Ultra 7 258V, 8 núcleos, até 4,8 GHz |
-| Cache | L1d 320 KiB (8 × 40 KiB), L2 14 MiB (5 instâncias), L3 12 MiB |
-| Memória | 30 GiB |
-| Sistema | Linux 7.2.5 (Omarchy 4.0.4) |
-| Compilador | GCC 16.2.1 |
-| Compilação | `gcc -std=c99 -O2 -Wall -Wextra`, igual para as duas implementações |
+Intel Core Ultra 7 258V (cache L3 de 12 MiB), Linux, GCC 16.2.1, com `gcc -std=c99 -O2 -Wall -Wextra` nas duas implementações.
 
 O programa de medição (`auxiliar/benchmark.c`) é compilado duas vezes, uma com cada implementação, gerando `bench_seq` e `bench_enc`. Ele acessa a lista somente pelas funções de `ListaComCursor.h`. Durante a medição, o perfil de energia fica em `performance` e o processo fica fixo no núcleo 1 (`taskset -c 1`). Os dois ajustes são feitos por `auxiliar/rodar_benchmark.sh`.
 
@@ -92,7 +85,7 @@ Depois da construção, as capacidades são 1.024, 65.536, 131.072, 524.288 e 1.
 
 Tempo médio de um bloco de operações em µs (média ± desvio padrão de 10 execuções). Os valores completos estão em `resultados/resumo.csv`, e as medições individuais em `resultados/tempos.csv`.
 
-**Caso 1. Inserções no início** (µs por bloco, média ± desvio padrão)
+#### Caso 1. Inserções no início (µs por bloco, média ± desvio padrão)
 
 | n | R | Sequencial | Encadeada |
 |---:|---:|---:|---:|
@@ -102,7 +95,7 @@ Tempo médio de um bloco de operações em µs (média ± desvio padrão de 10 e
 | 500.000 | 32 | 12.519,3 ± 41,62 | 0,911 ± 0,052 |
 | 1.000.000 | 16 | 25.944,8 ± 81,97 | 0,960 ± 0,064 |
 
-**Caso 2. Acesso por índice** (µs por bloco, média ± desvio padrão)
+#### Caso 2. Acesso por índice (µs por bloco, média ± desvio padrão)
 
 | n | R | Sequencial | Encadeada |
 |---:|---:|---:|---:|
@@ -112,7 +105,7 @@ Tempo médio de um bloco de operações em µs (média ± desvio padrão de 10 e
 | 500.000 | 8 | 0,166 ± 0,006 | 15.226,1 ± 1.621,7 |
 | 1.000.000 | 4 | 0,301 ± 0,089 | 44.185,5 ± 5.075,4 |
 
-**Caso 3. Remoções no início** (µs por bloco, média ± desvio padrão)
+#### Caso 3. Remoções no início (µs por bloco, média ± desvio padrão)
 
 | n | R | Sequencial | Encadeada |
 |---:|---:|---:|---:|
@@ -122,7 +115,7 @@ Tempo médio de um bloco de operações em µs (média ± desvio padrão de 10 e
 | 500.000 | 32 | 13.660,3 ± 194,60 | 0,836 ± 0,078 |
 | 1.000.000 | 16 | 29.158,1 ± 336,44 | 0,858 ± 0,074 |
 
-**Caso 4. Remoções no meio** (µs por bloco, média ± desvio padrão)
+#### Caso 4. Remoções no meio (µs por bloco, média ± desvio padrão)
 
 | n | R | Sequencial | Encadeada |
 |---:|---:|---:|---:|
@@ -132,7 +125,7 @@ Tempo médio de um bloco de operações em µs (média ± desvio padrão de 10 e
 | 500.000 | 32 | 7.121,5 ± 51,91 | 1,04 ± 0,045 |
 | 1.000.000 | 16 | 14.678,2 ± 151,97 | 1,27 ± 0,037 |
 
-**Caso 5. Percurso completo** (µs por bloco, média ± desvio padrão)
+#### Caso 5. Percurso completo (µs por bloco, média ± desvio padrão)
 
 | n | R | Sequencial | Encadeada |
 |---:|---:|---:|---:|
@@ -164,7 +157,7 @@ Nos casos 1 a 4, o bloco tem 100 operações, então o tempo do bloco é 100 vez
 
 **Caso 1 (inserção no início).** Na sequencial, cada inserção desloca os n elementos uma posição à direita. O bloco passou de 20,7 µs (n = 1.000) para 25,9 ms (n = 1.000.000): um fator de 1.251 para n mil vezes maior, ou seja, linear. Cada inserção custa cerca de 259 µs com 1 milhão de elementos, aproximadamente 0,26 ns por elemento deslocado. Na encadeada, a inserção só liga ponteiros e faz um `malloc`. O bloco ficou entre 0,89 e 0,96 µs em todos os tamanhos (cerca de 9 ns por inserção). Com n = 1.000.000, a encadeada foi cerca de 27.000 vezes mais rápida.
 
-**Caso 2 (acesso por índice).** Na sequencial, o acesso é direto: entre 1,3 e 1,7 ns por acesso até 500.000. Com 1.000.000 o bloco sobe para 0,30 µs: o vetor de 4 MB não cabe mais na L2 do núcleo, e acessos aleatórios passam a gerar falhas de cache. Na encadeada, cada acesso percorre em média n/4 nós. O bloco cresce de 18,6 µs para 44,2 ms, cerca de 442 µs por acesso com 1 milhão de elementos. O custo por nó percorrido sobe de cerca de 0,95 ns (n = 50.000) para 1,8 ns (n = 1.000.000), porque a lista grande (dezenas de MB em nós) não cabe na L3 de 12 MiB. Pelo mesmo motivo, esse é o caso de maior desvio padrão (cerca de 11% em n = 1.000.000). Com n = 1.000.000, a sequencial foi cerca de 147.000 vezes mais rápida.
+**Caso 2 (acesso por índice).** Na sequencial, o acesso é direto: entre 1,3 e 1,7 ns por acesso até 500.000. Com 1.000.000 o bloco sobe para 0,30 µs: o vetor de 4 MB deixa de caber nas caches mais próximas do núcleo, e acessos aleatórios passam a gerar falhas de cache. Na encadeada, cada acesso percorre em média n/4 nós. O bloco cresce de 18,6 µs para 44,2 ms, cerca de 442 µs por acesso com 1 milhão de elementos. O custo por nó percorrido sobe de cerca de 0,95 ns (n = 50.000) para 1,8 ns (n = 1.000.000), porque a lista grande (dezenas de MB em nós) não cabe na L3 de 12 MiB. Pelo mesmo motivo, esse é o caso de maior desvio padrão (cerca de 11% em n = 1.000.000). Com n = 1.000.000, a sequencial foi cerca de 147.000 vezes mais rápida.
 
 **Caso 3 (remoção no início).** Este caso espelha o caso 1. A sequencial desloca n - 1 elementos à esquerda por remoção, e o bloco vai de 20,4 µs a 29,2 ms, de forma linear. A encadeada religa dois ponteiros e chama `free`: o bloco fica entre 0,77 e 0,86 µs, constante.
 

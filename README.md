@@ -26,6 +26,7 @@ Lista com Cursor em vetor dinâmico e em lista duplamente encadeada, com compara
 ./testes/rodar_testes.sh        # testa as duas implementações (com sanitizer)
 ./auxiliar/rodar_benchmark.sh   # mede tudo (~2 min) e regrava resultados/ e graficos/
 ./entrega/gerar_zips.sh         # entrega/trabalho2.1_sequencial.zip e trabalho2.2_encadeada.zip
+python3 gerar_pdf.py            # relatorio.md → relatorio.pdf com capa e sumário (precisa de markdown e chromium)
 ```
 
 Rodar o benchmark de novo muda os números; aí as tabelas do relatório precisam ser atualizadas.
